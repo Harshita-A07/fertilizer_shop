@@ -1,0 +1,112 @@
+.H1{
+    
+    font-family: Arial, sans-serif;
+    text-align: center;
+    
+    margin-top: 43px;
+   
+}
+body {
+    background-color: #edffe6; /* Change this color as needed */
+    margin: 0;
+    padding: 0;
+}
+
+#i1 {
+    display: block;
+    margin: 0 auto;
+}
+.homelogo {
+    position: absolute;
+    left: 13px; /* Adjust for spacing */
+    top: 10px; /* Adjust to position vertically */
+    font-size: 26px;
+    color: rgb(43, 81, 38); /* Adjust color */
+}
+header{
+    position: fixed;
+    width:100%;
+    
+    top:0;
+    right:0;
+    z-index:1000;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px ;
+    padding-left: 4px;
+    transition: all .50s ease;
+}
+.logo{
+    display:flex;
+     align-items: center;
+     margin-right:3px;
+     padding-left: 20px;
+}
+
+/* ===GOOGLE FONTS===*/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;1,200&display=swap');
+:root{
+    --hue:152;
+    --hue: 152;
+  --first-color: hsl(var(--hue), 24%, 32%);
+  --first-color-alt: hsl(var(--hue), 24%, 28%);
+  --first-color-light: hsl(var(--hue), 24%, 66%);
+  --first-color-lighten: hsl(var(--hue), 24%, 92%);
+  --title-color: hsl(var(--hue), 4%, 15%);
+  --text-color: hsl(var(--hue), 4%, 35%);
+  --text-color-light: hsl(var(--hue), 4%, 55%);
+  --body-color: hsl(var(--hue), 0%, 100%);
+  --container-color: #FFF;
+
+  /*========== Font and typography ==========*/
+  /*.5rem = 8px | 1rem = 16px ...*/
+  --body-font: 'Poppins', sans-serif;
+  --big-font-size: 2rem;
+  --h1-font-size: 1.5rem;
+  --h2-font-size: 1.25rem;
+  --h3-font-size: 1rem;
+  --normal-font-size: .938rem;
+  --small-font-size: .813rem;
+  --smaller-font-size: .75rem;
+   /*========== z index ==========*/
+   --z-tooltip: 10;
+   --z-fixed: 100;
+}
+h1 {
+    color: #352a2ad7;
+    font-size: 45px;
+    font-family: Verdana, sans-serif;
+    margin-top: 40px;
+}
+li{
+    display:inline;
+    padding: 38px;
+
+}
+#tenor-gif-embed{
+    padding-left: 547px;
+}
+
+p {
+    font-size: 22px;
+    color: #333;
+    
+}
+
+a {
+    font-size: 20px;
+    color: #0d4f20;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #337955;
+    text-decoration: underline;
+}
+legend{
+    color:red;
+    size: 23px;
+
+}
