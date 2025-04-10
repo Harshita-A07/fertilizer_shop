@@ -6,6 +6,8 @@
   $password_db = "";  // Default password for XAMPP
   $dbname = "fertilizersdb";
   $port="3306";
+  $servername = "127.0.0.1";
+
 
 
 $conn = new mysqli($servername, $username, $password_db, $dbname,$port);
