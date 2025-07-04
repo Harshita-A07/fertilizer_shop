@@ -1,0 +1,69 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f2fff5;
+  color: #333;
+}
+
+.hero {
+  background-color: #b4e7c2;
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.hero h1 {
+  margin-bottom: 10px;
+}
+
+.btn {
+  padding: 10px 20px;
+  background-color: #379683;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+.info-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 30px 20px;
+  background-color: #e6f5ea;
+}
+
+.info-cards .card {
+  width: 22%;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.newsletter {
+  background-color: #d2f5d0;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.newsletter input[type=\"email\"] {
+  padding: 10px;
+  width: 250px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.newsletter button {
+  padding: 10px 15px;
+  margin-left: 10px;
+  background-color: #379683;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+footer {
+  background-color: #b4e7c2;
+  text-align: center;
+  padding: 15px;
+}

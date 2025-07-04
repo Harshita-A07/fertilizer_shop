@@ -1,46 +1,45 @@
 <?php
+include('connect.php'); // include your DB connection
 
-include "connect.php";
-  
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve input values
-    $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
-    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-    $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_NUMBER_INT);
-    $city = filter_input(INPUT_POST, 'city', FILTER_SANITIZE_STRING);
-    $password = $_POST['password'];
-    $confirm_password = $_POST['confirm_password'];
-
-    //echo $password ." ". $confirm_password;
-    
-    // Check for empty fields
-    if (empty($name) || empty($email) || empty($phone) || empty($city) || empty($password) || empty($confirm_password)) {
-        die("All fields are required!");
-    }
+// Check if form is submitted
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Get form inputs
+    $name     = trim($_POST['name']);
+    $email    = trim($_POST['email']);
+    $phone    = trim($_POST['phone']);
+    $password = trim($_POST['password']);
+    $confirm_password = trim($_POST['confirm_password']);
+    $city     = trim($_POST['city']); // Not stored in DB, unless added to the table
 
     // Check if passwords match
     if ($password !== $confirm_password) {
-        die("Passwords  not match!");
+        echo "Passwords do not match!";
+        exit;
     }
 
-    // Hash the password for security
-    //$hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    // OPTIONAL: You can hash passwords here if you want more security
+    // $password = password_hash($password, PASSWORD_DEFAULT);
 
-  
+    // Insert user into the Users table
+    $sql = "INSERT INTO Users (Name, Password, Email, Phone)
+            VALUES (?, ?, ?, ?)";
 
-    // Prepare SQL statement
-    $sql = "INSERT INTO users (name, email, phone, city, password) VALUES (?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssss", $name, $email, $phone, $city,$password);
+    $stmt->bind_param("ssss", $name, $password, $email, $phone);
 
     if ($stmt->execute()) {
-        echo "Registration !";
+        echo "Registration successful! <a href='login.html'>Login Now</a>";
     } else {
-        echo "Error: " . $stmt->error;
+        // Handle duplicate email or name
+        if ($conn->errno == 1062) {
+            echo "User already exists with this name or email.";
+        } else {
+            echo "Error: " . $stmt->error;
+        }
     }
-
-    // Close the connection
     $stmt->close();
     $conn->close();
+} else {
+    echo "\n Invalid request!";
 }
 ?>
