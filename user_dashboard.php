@@ -62,7 +62,7 @@ $cartItems = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
         <a href="#" class="tab-link" data-tab="products"><i class='bx bx-box'></i> All Products</a>
         <a href="#" class="tab-link" data-tab="blogs"><i class='bx bx-news'></i> Owner's Blogs</a>
         <a href="#" class="tab-link" data-tab="cart"><i class='bx bx-cart'></i> My Cart</a>
-        <a href="logout.php"><i class='bx bx-log-out'></i> Logout</a>
+        <a href="logout_userdashboard.php"><i class='bx bx-log-out'></i> Logout</a>
     </div>
 
     <!-- Main Content -->

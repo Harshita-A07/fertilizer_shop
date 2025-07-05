@@ -14,7 +14,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['user_id'] = $row['Admin_ID'];
         $_SESSION['username'] = $row['Name'];
         $_SESSION['success_message'] = "Login successful! Welcome, " . $row['Name'] . ".";
-        header("Location: admin_dashboard/index.html");
+        header("Location: admin_dashboard.php");
+
         
         exit();
     } else {

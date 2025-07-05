@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>About Us - AgriShop</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="about_us.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="nav-container">
+      <div class="logo"><i class="ri-leaf-fill"></i> AgriShop</div>
+      <nav class="nav-links">
+        <a href="front.html">Home</a>
+        <a href="#">About</a>
+        <a href="#">Blog</a>
+        <a href="#">Contact</a>
+        <a href="admin.php">Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <section class="about-hero">
+    <h1>About AgriShop</h1>
+    <p>Empowering farmers with quality fertilizers, tools, and agricultural insights.</p>
+  </section>
+
+  <!-- About Story -->
+  <section class="about-content">
+    <div class="about-text">
+      <h2>Our Story</h2>
+      <p>
+        AgriShop was born out of a desire to make agricultural supplies easily accessible to farmers across the region.
+        We aim to support both small-scale and large-scale farming communities with top-quality fertilizers and farming
+        essentials.
+      </p>
+    </div>
+    <div class="about-image">
+      <img src="assets/about_us.jpg" alt="Farming Story">
+    </div>
+  </section>
+
+  <!-- Mission Section -->
+  <section class="mission-section">
+    <h2>Our Mission</h2>
+    <div class="cards">
+      <div class="card" onclick="toggleCard(this)">
+        <h3>High-Quality Products</h3>
+        <p class="card-info">We ensure every product meets safety and nutrient standards before it reaches your farm.</p>
+      </div>
+      <div class="card" onclick="toggleCard(this)">
+        <h3>Support for Farmers</h3>
+        <p class="card-info">We offer tips, blogs, and support to help you grow better crops and get higher yields.</p>
+      </div>
+      <div class="card" onclick="toggleCard(this)">
+        <h3>Sustainable Practices</h3>
+        <p class="card-info">We promote eco-friendly and sustainable agriculture through our recommendations and products.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team or Placeholder Images -->
+  <section class="team-section">
+    <h2>Meet the Team</h2>
+    <div class="team-gallery">
+      <img src="assets/staff1.jpg" alt="Team Member 1">
+      <img src="assets/staff2.jpg" alt="Team Member 2">
+      <img src="assets/staff3.jpg" alt="Team Member 3">
+    </div>
+  </section>
+
+  <script>
+    function toggleCard(card) {
+      card.classList.toggle("active");
+    }
+  </script>
+
+</body>
+</html>
