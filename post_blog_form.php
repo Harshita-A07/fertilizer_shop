@@ -149,15 +149,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   </style>
 </head>
 <body>
-  <!-- Include Sidebar -->
-  <?php include('admin_sidebar.php'); ?>
+ 
 
   <!-- Main Content -->
   <div class="main-content">
-    <div class="topbar">
-        <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+    
         <h1>Post a New Blog</h1>
-    </div>
+   
 
     <div class="blog-container">
       <h2>Post a New Blog</h2>

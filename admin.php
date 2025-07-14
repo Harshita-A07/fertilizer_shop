@@ -55,11 +55,11 @@
     <h2>Login/Register</h2>
 
     <br>
-    <form action="admin_login.html" method="post">
+    <form action="admin/admin_login.html" method="post">
       <button type="submit">Admin Login</button>
     </form>
     <br>
-    <form action="admin_register.html" method="get">
+    <form action="admin/admin_register.html" method="get">
       <button type="submit">Admin Register</button>
     </form>
   </div>

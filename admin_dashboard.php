@@ -139,9 +139,9 @@ $totalBlogs = $blogResult->fetch_assoc()['total'];
     <a href="admin_dashboard.php"><i class='bx bx-home'></i> Dashboard</a>
     <a href="/fertilizershop/admin_products/manage_products.php"><i class='bx bx-box'></i> Manage Products</a>
     <a href="manage_users.php"><i class='bx bx-user'></i> Manage Users</a>
-    <a href="post_blog_form.php"><i class='bx bx-pencil'></i> Post Blog</a>
+    <a href="admin_dashboard/admin_blog_dashboard.php"><i class='bx bx-pencil'></i> Post Blog</a>
     <div class="logout">
-      <a href="/logout_userdashboard.php"><i class='bx bx-log-out'></i> Logout</a>
+      <a href="admin/admin_logout.php"><i class='bx bx-log-out'></i> Logout</a>
     </div>
   </div>
 

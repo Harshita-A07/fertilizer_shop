@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('connect.php');
+include('../connect.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name'];
@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['user_id'] = $row['Admin_ID'];
         $_SESSION['username'] = $row['Name'];
         $_SESSION['success_message'] = "Login successful! Welcome, " . $row['Name'] . ".";
-        header("Location: admin_dashboard.php");
+        header("Location: ../admin_dashboard.php");
 
         
         exit();

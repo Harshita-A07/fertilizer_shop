@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('connect.php');
+include('../connect.php');
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.html");
@@ -55,7 +55,7 @@ $cartItems = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
 </head>
 <body>
 
-    <!-- Sidebar -->
+    <!-- Sidebar -->   
     <div class="sidebar">
         <h2>🌿 Fertilizer Shop</h2>
         <a href="#" class="tab-link active" data-tab="dashboard"><i class='bx bx-home'></i> Dashboard</a>
@@ -63,6 +63,7 @@ $cartItems = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
         <a href="#" class="tab-link" data-tab="blogs"><i class='bx bx-news'></i> Owner's Blogs</a>
         <a href="#" class="tab-link" data-tab="cart"><i class='bx bx-cart'></i> My Cart</a>
         <a href="logout_userdashboard.php"><i class='bx bx-log-out'></i> Logout</a>
+
     </div>
 
     <!-- Main Content -->
@@ -115,7 +116,7 @@ $cartItems = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
                     <div class="card">
                         <h3><?= $blog['Title'] ?></h3>
                         <?php if ($blog['Image_Path']) { ?>
-                            <img src="<?= $blog['Image_Path'] ?>" alt="Blog Image">
+                            <img src="../<?= $blog['Image_Path'] ?>" alt="Blog Image">
                         <?php } ?>
                         <p><?= substr($blog['Content'], 0, 100) ?>...</p>
                         <small><em>Posted on <?= date('d M Y', strtotime($blog['Date_Posted'])) ?></em></small>

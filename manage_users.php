@@ -108,15 +108,31 @@ $result = $conn->query("SELECT * FROM Users");
             color: white;
             cursor: pointer;
         }
-
+         .back-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            background-color: #81c784;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: bold;
+}         .back-button:hover {
+    background-color: #66bb6a;
+}
         .edit-btn { background-color: #1976d2; }
         .reset-btn { background-color: #ff9800; }
-        .delete-btn { background-color: #e53935; }
+        .delete-btn { background-color: #e53935;
+         margin-top: 5px; }
     </style>
 </head>
 <body>
 
 <div class="container">
+<!-- 🔙 Back to Dashboard Button -->
+    <a href="admin_dashboard.php" class="back-button">⬅️ Back to Dashboard</a>
+
     <h2>Manage Users</h2>
 
     <!-- ✅ Status Messages -->
@@ -125,7 +141,7 @@ $result = $conn->query("SELECT * FROM Users");
             <?= $_GET['status'] === 'deleted' ? 'success' : ($_GET['status'] === 'error' ? 'error' : '') ?>">
             <?php
                 if ($_GET['status'] === 'deleted') echo "✅ User deleted successfully.";
-                elseif ($_GET['status'] === 'error') echo "❌ Error processing your request.";
+                elseif ($_GET['status'] === 'error') echo "X Error processing your request.";
                 elseif ($_GET['status'] === 'updated') echo "✅ User updated successfully.";
                 elseif ($_GET['status'] === 'added') echo "✅ User added successfully.";
             ?>
