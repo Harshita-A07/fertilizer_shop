@@ -29,8 +29,10 @@ AgriShop is a web-based platform designed to simplify the purchase and managemen
 - **Tools**: XAMPP / Apache Server
 
 ---
-Home page
+**Home page**
 ![home Page Screenshot](images/home_page.png)
+
+
 
 
 
