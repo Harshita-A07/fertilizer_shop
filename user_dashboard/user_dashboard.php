@@ -90,23 +90,45 @@ $cartItems = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
             </div>
         </div>
 
-        <!-- Products -->
-        <div id="products" class="section">
-            <h2>📦 All Products</h2>
-            <div class="products">
-                <?php while($row = $products->fetch_assoc()) { ?>
-                    <div class="card">
-                        <h3><?= $row['Name'] ?></h3>
-                        <p><?= $row['Description'] ?></p>
-                        <p><strong>₹<?= $row['Price'] ?></strong></p>
-                        <form method="POST" action="add_to_cart.php">
-                            <input type="hidden" name="product_id" value="<?= $row['Product_ID'] ?>">
-                            <button type="submit" class="btn">Add to Cart</button>
-                        </form>
-                    </div>
-                <?php } ?>
-            </div>
-        </div>
+        <!-- Products with Search -->
+<div id="products" class="section">
+    <h2>📦 All Products</h2>
+
+    <!-- Search bar -->
+    <form method="GET" style="margin-bottom: 20px;">
+        <input type="hidden" name="tab" value="products">
+        <input type="text" name="search" placeholder="Search by name or type..." value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>" style="padding: 8px; width: 250px; border-radius: 5px; border: 1px solid #ccc;">
+        <button type="submit" class="btn">Search</button>
+    </form>
+
+    <div class="products">
+        <?php
+        $searchTerm = isset($_GET['search']) ? $conn->real_escape_string($_GET['search']) : '';
+        $query = "SELECT * FROM Products";
+        if (!empty($searchTerm)) {
+            $query .= " WHERE Name LIKE '%$searchTerm%' OR Category LIKE '%$searchTerm%'";
+        }
+        $result = $conn->query($query);
+        ?>
+
+        <?php if ($result->num_rows > 0): ?>
+            <?php while ($row = $result->fetch_assoc()) { ?>
+                <a href="product_detail.php?product_id=<?= $row['Product_ID'] ?>" style="text-decoration: none; color: inherit;">
+    <div class="card">
+        <?php if (!empty($row['Image_Path'])): ?>
+            <img src="../<?= $row['Image_Path'] ?>" alt="<?= $row['Name'] ?>" style="width:100%; height:180px; object-fit:cover; border-radius:8px;">
+        <?php endif; ?>
+        <h3><?= $row['Name'] ?></h3>
+        <p><strong>₹<?= $row['Price'] ?></strong></p>
+    </div>
+</a>
+
+            <?php } ?>
+        <?php else: ?>
+            <p>No products found.</p>
+        <?php endif; ?>
+    </div>
+</div>
 
         <!-- Blogs -->
         <div id="blogs" class="section">
