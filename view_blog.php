@@ -35,7 +35,7 @@ include('connect.php');
             box-shadow: 0 4px 8px rgba(0,0,0,0.08);
             padding: 20px;
             margin-bottom: 25px;
-            max-width: 800px;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -46,7 +46,7 @@ include('connect.php');
         }
 
         .blog-post img {
-            max-width: 100%;
+            max-width: 80%;
             border-radius: 8px;
             margin: 10px 0;
         }
@@ -72,12 +72,13 @@ include('connect.php');
         }
 
         .back-link {
-            display: block;
-            text-align: left;
-            margin: 10px 0 30px 10px;
-            font-size: 14px;
-            color: #333;
-            text-decoration: none;
+            padding: 10px 20px;
+            margin-top: 20px;
+            font-size: 15px; 
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
 
         .back-link:hover {
@@ -87,7 +88,7 @@ include('connect.php');
 </head>
 <body>
 
-    <a class="back-link" href="admin_blog_dashboard.php">← Back to Blog Dashboard</a>
+    <a class="back-link"  href="admin_blog_dashboard.php" style="background-color: #777">← Back to Blog Dashboard</a>
 
     <h2>All Blog Posts</h2>
 

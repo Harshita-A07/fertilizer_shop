@@ -133,7 +133,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       border-radius: 8px;
       font-size: 16px;
       cursor: pointer;
-      transition: background 0.3s ease;
+     
     }
 
     button[type="submit"]:hover {
@@ -154,7 +154,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <!-- Main Content -->
   <div class="main-content">
     
-        <h1>Post a New Blog</h1>
+        
    
 
     <div class="blog-container">

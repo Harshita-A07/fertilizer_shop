@@ -177,12 +177,16 @@ $result = $conn->query("SELECT * FROM Users");
                 <td><?= $row['Avg_Order_Value'] ?></td>
                 <td><?= $row['Loyalty_Points'] ?></td>
                 <td>
-                    <a class="btn edit-btn" href="edit_user.php?id=<?= $row['User_ID'] ?>">Edit</a>
-                    <a class="btn reset-btn" href="reset_password.php?id=<?= $row['User_ID'] ?>">Reset</a>
-                    <a class="btn delete-btn" href="delete_user.php?id=<?= $row['User_ID'] ?>" onclick="return confirm('Are you sure you want to delete this user?')">Delete</a>
-                </td>
+    <div class="action-buttons">
+        <a class="btn edit-btn" href="edit_user.php?id=<?= $row['User_ID'] ?>">Edit</a>
+        <a class="btn reset-btn" href="reset_password.php?id=<?= $row['User_ID'] ?>">Reset</a>
+        <a class="btn delete-btn" href="delete_user.php?id=<?= $row['User_ID'] ?>" onclick="return confirm('Are you sure you want to delete this user?')">Delete</a>
+    </div>
+</td>
+
             </tr>
             <?php } ?>
+            
         </tbody>
     </table>
 </div>

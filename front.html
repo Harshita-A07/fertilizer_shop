@@ -335,7 +335,59 @@
   background-color: #e9ebe9ec;
   color: #3f623f;
 }
+.chatbot-container {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 300px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  display: none;
+  flex-direction: column;
+  z-index: 999;
+}
 
+.chatbot-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      font-size: 28px;
+      background: #28a745;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      cursor: pointer;
+      z-index: 999;
+    }
+.chatbot-messages {
+      height: 200px;
+      overflow-y: auto;
+      padding: 10px;
+      font-size: 14px;
+    }
+
+    .chatbot-input-area {
+      display: flex;
+      border-top: 1px solid #ccc;
+    }
+
+    .chatbot-input-area input {
+      flex: 1;
+      border: none;
+      padding: 10px;
+    }
+
+    .chatbot-input-area button {
+      background: #8adc9d;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+    }
 
 
   </style>
@@ -455,6 +507,52 @@
   <button class="chatbot-button" title="Chat with us">
     💬
   </button>
+<!-- Chatbot Box -->
+<div class="chatbot-container" id="chatbot" style="display: none;">
+  <div class="chatbot-header">Fertilizer Assistant</div>
+  <div class="chatbot-messages" id="messages"></div>
+  <div class="chatbot-input-area">
+    <input type="text" id="userInput" placeholder="Ask something..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div>
+<!-- Chatbot Script -->
+<script>
+  // Toggle chatbot
+  document.querySelector('.chatbot-button').addEventListener('click', () => {
+    const box = document.getElementById('chatbot');
+    box.style.display = box.style.display === 'none' ? 'flex' : 'none';
+  });
+
+  // Send message
+  function sendMessage() {
+    const input = document.getElementById('userInput');
+    const message = input.value.trim();
+    if (!message) return;
+
+    showMessage('You', message);
+    input.value = '';
+
+    fetch('chatbot.php', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: 'message=' + encodeURIComponent(message)
+    })
+    .then(res => res.text())
+    .then(reply => showMessage('Bot', reply));
+  }
+
+  // Display message
+  function showMessage(sender, text) {
+    const msgBox = document.getElementById('messages');
+    const div = document.createElement('div');
+    div.textContent = `${sender}: ${text}`;
+    msgBox.appendChild(div);
+    msgBox.scrollTop = msgBox.scrollHeight;
+  }
+</script>
+
+  <!--FAQ toggle script-->>
 
   <script>
     function toggleCard(card) {

@@ -1,46 +1,46 @@
 <?php
 session_start();
-include('../connect.php');
+include '../connect.php'; // Your DB connection file
+var_dump($_POST);  // Put at the top of add_to_cart.php
+exit;
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $product_id = $_POST['product_id'];
 
-    // Fetch product from DB
-    $stmt = $conn->prepare("SELECT * FROM Products WHERE Product_ID = ?");
-    $stmt->bind_param("i", $product_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $product = $result->fetch_assoc();
-
-    if ($product) {
-        $cartItem = [
-            'id' => $product['Product_ID'],
-            'name' => $product['Name'],
-            'price' => $product['Price'],
-            'qty' => 1
-        ];
-
-        // Initialize cart if not set
-        if (!isset($_SESSION['cart'])) {
-            $_SESSION['cart'] = [];
-        }
-
-        $found = false;
-        // If already in cart, increase qty
-        foreach ($_SESSION['cart'] as &$item) {
-            if ($item['id'] == $product['Product_ID']) {
-                $item['qty']++;
-                $found = true;
-                break;
-            }
-        }
-
-        if (!$found) {
-            $_SESSION['cart'][] = $cartItem;
-        }
-    }
-
-    header("Location: user_dashboard.php?tab=cart");
-    exit();
+if (!isset($_SESSION['user_id'])) {
+    echo "Please log in to add to cart.";
+    exit;
 }
+
+$user_id = $_SESSION['user_id'];
+$product_id = $_POST['product_id'];  // Coming from form or AJAX
+$quantity = isset($_POST['quantity']) ? $_POST['quantity'] : 1;
+
+// Check if product is already in cart
+$checkQuery = "SELECT * FROM cart WHERE User_ID = ? AND Product_ID = ?";
+$stmt = $conn->prepare($checkQuery);
+$stmt->bind_param("ii", $user_id, $product_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    // If already in cart, just update quantity
+    $updateQuery = "UPDATE cart SET Quantity = Quantity + ? WHERE User_ID = ? AND Product_ID = ?";
+    $stmt = $conn->prepare($updateQuery);
+    $stmt->bind_param("iii", $quantity, $user_id, $product_id);
+} else {
+    // Else, insert new row
+    $insertQuery = "INSERT INTO cart (User_ID, Product_ID, Quantity) VALUES (?, ?, ?)";
+    $stmt = $conn->prepare($insertQuery);
+    $stmt->bind_param("iii", $user_id, $product_id, $quantity);
+}
+
+if ($stmt->execute()) {
+    // Redirect to view cart page
+    header("Location:user_dashboard.php?tab=cart");
+    exit;
+} else {
+    echo "Error: " . $stmt->error;
+}
+
+
+$conn->close();
 ?>

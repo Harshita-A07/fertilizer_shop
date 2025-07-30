@@ -6,6 +6,13 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: login.html");
     exit();
 }
+// ✅ Add this line:
+$user_id = $_SESSION['user_id'];
+
+// Fetch data
+$suggestions = $conn->query("SELECT * FROM Products ORDER BY RAND() LIMIT 4");
+$products = $conn->query("SELECT * FROM Products");
+$blogs = $conn->query("SELECT * FROM blogs ORDER BY Date_Posted DESC LIMIT 3");
 
 // Fetch data
 $suggestions = $conn->query("SELECT * FROM Products ORDER BY RAND() LIMIT 4");
@@ -146,32 +153,54 @@ $cartItems = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
                 <?php } ?>
             </div>
         </div>
+<!-- My Cart Section -->
+<div id="cart" class="section">
+    <h2>🛒 Items in Your Cart</h2>
+    <?php
+    $cartQuery = "
+        SELECT cart.Product_ID, products.Name, products.Price, cart.Quantity, (products.Price * cart.Quantity) AS Total
+        FROM cart
+        JOIN products ON cart.Product_ID = products.Product_ID
+        WHERE cart.User_ID = ?
+    ";
+    $stmt = $conn->prepare($cartQuery);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    ?>
 
-        <!-- Cart -->
-        <div id="cart" class="section">
-            <h2>🛒 My Cart</h2>
-            <?php if (!empty($cartItems)) { ?>
-                <table>
-                    <tr><th>Product</th><th>Price</th><th>Qty</th><th>Total</th><th>Action</th></tr>
-                    <?php
-                    $grandTotal = 0;
-                    foreach ($cartItems as $item) {
-                        $total = $item['qty'] * $item['price'];
-                        $grandTotal += $total;
-                        echo "<tr>
-                                <td>{$item['name']}</td>
-                                <td>₹{$item['price']}</td>
-                                <td>{$item['qty']}</td>
-                                <td>₹" . number_format($total, 2) . "</td>
-                            </tr>";
-                    }
-                    echo "<tr><td colspan='3'><strong>Grand Total</strong></td><td><strong>₹" . number_format($grandTotal, 2) . "</strong></td></tr>";
-                    ?>
-                </table>
-            <?php } else { ?>
-                <p>Your cart is currently empty.</p>
-            <?php } ?>
+    <form method="POST" action="update_cart.php">
+        <table>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Action</th>
+            </tr>
+            <?php
+            $total_cart_price = 0;
+            while ($row = $result->fetch_assoc()) {
+                $total_cart_price += $row['Total'];
+                echo "<tr>
+                        <td>{$row['Name']}</td>
+                        <td>₹{$row['Price']}</td>
+                        <td><input type='number' name='quantities[{$row['Product_ID']}]' value='{$row['Quantity']}' min='1'></td>
+                        <td>₹{$row['Total']}</td>
+                        <td><a href='remove_item.php?product_id={$row['Product_ID']}' style='color:red;'>Remove</a></td>
+                    </tr>";
+            }
+            ?>
+        </table>
+        <p class="total">Cart Total: ₹<?= $total_cart_price ?></p>
+        <div style="margin-top: 20px;">
+            <button type="submit" class="btn">Update Quantities</button>
+            <a href="checkout_address.php" class="btn">Proceed to Checkout</a>
         </div>
+    </form>
+</div>
+
+        
     </div>
 
     <script>

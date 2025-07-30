@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include('../connect.php');
 
@@ -9,25 +10,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
 
+    // Check if passwords match
     if ($password !== $confirm_password) {
         echo "<script>alert('Passwords do not match!');</script>";
     } else {
-        $query = "INSERT INTO users (Name, Email, Phone, Password) 
-                  VALUES ('$name', '$email', '$phone', '$password')";
+        // Check if email already exists
+        $check_email = "SELECT * FROM users WHERE Email = '$email'";
+        $result = mysqli_query($conn, $check_email);
 
-        if (mysqli_query($conn, $query)) {
-            // Set session variables after successful signup
-            $_SESSION['user_id'] = mysqli_insert_id($conn);
-            $_SESSION['username'] = $name;
-
-            // Redirect to user dashboard
-            header("Location: ../user_dashboard/user_dashboard.php");
-            exit;
+        if (mysqli_num_rows($result) > 0) {
+            echo "<script>alert('Email already registered. Please login or use another email.');</script>";
         } else {
-            echo "<script>alert('Signup Failed! Please try again.');</script>";
+            // Insert new user
+            $query = "INSERT INTO users (Name, Email, Phone, Password) 
+                      VALUES ('$name', '$email', '$phone', '$password')";
+
+            if (mysqli_query($conn, $query)) {
+                $_SESSION['user_id'] = mysqli_insert_id($conn);
+                $_SESSION['username'] = $name;
+                header("Location: ../user_dashboard/user_dashboard.php");
+                exit;
+            } else {
+                echo "<script>alert('Signup Failed! Please try again.');</script>";
+            }
         }
     }
 }
+
 ?>
 
 <!DOCTYPE html>
