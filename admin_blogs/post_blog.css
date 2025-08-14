@@ -1,0 +1,36 @@
+/* Sidebar */
+#sidebar {
+  width: 250px;
+  background-color: #2c4d4d;
+  color: white;
+  min-height: 100vh;
+  padding: 20px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 10; /* Ensure it stays on top */
+}
+
+/* Main content next to the sidebar */
+.main-content {
+  margin-left: 250px; /* Ensure the content is not behind the sidebar */
+  padding: 30px;
+  width: calc(100% - 250px); /* Adjust width accordingly */
+}
+
+/* Top bar */
+.topbar {
+  background-color: #2c4d4d;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: 24px;
+}
